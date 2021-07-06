@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useEffect, useState } from "react";
+import context from "./Context/context";
+import Page from "./Pages/Page";
+import "./App.css"
 
-function App() {
+const App = () => {
+  const [themeMode, setThemeMode] = useState("light");
+
+  useEffect(() => {
+    const localTheme = localStorage.getItem("theme"); //This is a string
+    if (localTheme) {
+      setThemeMode(localTheme);
+    }
+  }, []);
+  useEffect(() => localStorage.setItem("theme", themeMode));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <context.Provider value={{ themeMode, setThemeMode }}>
+      <Page />
+    </context.Provider>
   );
-}
+};
 
 export default App;
