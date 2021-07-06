@@ -1,4 +1,4 @@
-# Theme switch app that
+# Theme switch app
 A theme-switch app that persists theme after reloading.
 
 ## Try in your browser : 
